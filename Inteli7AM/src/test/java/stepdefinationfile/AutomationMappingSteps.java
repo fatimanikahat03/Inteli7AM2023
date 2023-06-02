@@ -204,4 +204,58 @@ WebElement acqTable =  driver.findElement(By.cssSelector(".wikitable.sortable.jq
   driver.switchTo().defaultContent();
 
  }
+
+ @When("Handle Auto sugg")
+ public void handleAutoSugg() throws InterruptedException {
+
+  driver.findElement(By.id("flying_from_N")).click();
+  WebElement fromDrop =  driver.findElement(By.id("flying_from"));
+  fromDrop.sendKeys("che");
+  Thread.sleep(2000);
+  int i =0;
+  while (i<4){
+   fromDrop.sendKeys(Keys.ARROW_DOWN);
+   i++;
+  }
+
+  fromDrop.sendKeys(Keys.ENTER);
+
+ }
+
+ public  void logic(){
+
+
+  driver.findElement(By.xpath("//div[@class='ui-datepicker-group ui-datepicker-group-first']//span[@class='ui-datepicker-month']")).getText();
+  driver.findElement(By.cssSelector(".ui-icon.ui-icon-circle-triangle-e")).click();
+
+ }
+
+ @When("Handle the Cal icon")
+ public void handleTheCalIcon() {
+
+
+  driver.findElement(By.className("ui-datepicker-trigger")).click();
+//  driver.findElement(By.cssSelector(".ui-state-default.ui-state-highlight.ui-state-active")).click();
+
+  while( !driver.findElement(By.xpath("//div[@class='ui-datepicker-group ui-datepicker-group-first']//div[@class='ui-datepicker-title']")).getText().contains("December")){
+
+   driver.findElement(By.cssSelector(".ui-icon.ui-icon-circle-triangle-e")).click();
+
+  }
+
+  WebElement firstSection = driver.findElement(By.cssSelector(".ui-datepicker-group.ui-datepicker-group-first"));
+  int enabledDateCount = firstSection.findElements(By.xpath("//a[@class='ui-state-default']")).size();
+
+  for (int i =0 ; i < enabledDateCount ;i++){
+
+   String date = firstSection.findElements(By.xpath("//a[@class='ui-state-default']")).get(i).getText();
+
+   if(date.equals("22")){
+    firstSection.findElements(By.xpath("//a[@class='ui-state-default']")).get(i).click();
+    break;
+   }
+
+  }
+
+ }
 }

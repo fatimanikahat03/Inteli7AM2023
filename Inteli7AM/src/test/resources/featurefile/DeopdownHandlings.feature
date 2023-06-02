@@ -19,3 +19,13 @@ Feature:  To Validate the dropdown values
   Scenario: Drag and drop
     Given User launch the browser and navigate to the URL
     When handle the drag and drop
+
+  @AutoSugg
+  Scenario: Auto suggestive dropdown
+    Given User launch the browser and navigate to the URL
+    When Handle Auto sugg
+
+  @Cal
+  Scenario:  To Handle the calander dropdown
+    Given User launch the browser and navigate to the URL
+    When Handle the Cal icon
