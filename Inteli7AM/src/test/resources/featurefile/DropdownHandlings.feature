@@ -10,6 +10,7 @@ Feature:  To Validate the dropdown values
   Scenario: To Handle the dynamic dropdown
     Given User launch the browser and navigate to the URL
     When handle dynamic dropdown
+
   @Actions
   Scenario: Mouse Actions
     Given User launch the browser and navigate to the URL
