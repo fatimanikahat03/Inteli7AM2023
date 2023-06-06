@@ -14,10 +14,18 @@ public class ArrayBasics {
 
             System.out.println(b[j]);
         }
+        System.out.println("--------------");
+        for (int p:a){
+            System.out.println(p);
+        }
 
         for (int i=0 ; i < a.length ; i++){
 
             System.out.println(a[i]);
+        }
+        System.out.println("------------");
+        for(String h:b){
+            System.out.println(h);
         }
 
 

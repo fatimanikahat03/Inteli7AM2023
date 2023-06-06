@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
         features = {"src/test/resources/featurefile"},
         glue = {"stepdefinationfile"},
-        tags = "@LoginTest",
+        tags = "@Table",
         plugin = {"pretty","html:target/cucumber.html","json:target/report.json","junit:target/report.xml"}
 
 

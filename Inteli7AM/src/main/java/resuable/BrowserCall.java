@@ -48,7 +48,9 @@ public class BrowserCall {
 //            throw new InvalidArgumentException("invalid browser name");
 //        }
 
-        driver.get(prob.getProperty("url"));
+     //   driver.get(prob.getProperty("url"));
+        driver.navigate().to(prob.getProperty("url"));
+        driver.navigate().refresh();
         driver.manage().window().maximize();
 
         return driver;

@@ -14,6 +14,10 @@ import org.openqa.selenium.support.ui.Select;
 import resuable.BrowserCall;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AutomationMappingSteps {
 
@@ -21,6 +25,8 @@ public class AutomationMappingSteps {
  WebElement currencyElement ;
 
  WebElement ctsTable;
+
+ List<String> firstColumn;
 
  @When("User enter the username {string} and password {string}")
 public void enterUsernamePassword(String userName , String password){
@@ -94,16 +100,24 @@ public void enterUsernamePassword(String userName , String password){
  @And("User iterates the dropdownvalues")
  public void userIteratesTheDropdownvalues() {
 
-  int sample = driver.findElements(By.tagName("option")).size();
-  System.out.println(sample);
- int currencyDropdownSize = currencyElement.findElements(By.tagName("option")).size();
+  List<WebElement> currency = currencyElement.findElements(By.tagName("option"));
+  List<String> currencyValue = new ArrayList<String>();
+  for (WebElement h:currency){
+    currencyValue.add(h.getText());
+  }
 
- for(int i =0 ; i < currencyDropdownSize ;i++ ){
-
-  String value =currencyElement.findElements(By.tagName("option")).get(i).getText();
-  System.out.println(value);
-
- }
+  System.out.println(currencyValue);
+//
+//  int sample = driver.findElements(By.tagName("option")).size();
+//  System.out.println(sample);
+// int currencyDropdownSize = currencyElement.findElements(By.tagName("option")).size();
+//
+// for(int i =0 ; i < currencyDropdownSize ;i++ ){
+//
+//  String value =currencyElement.findElements(By.tagName("option")).get(i).getText();
+//  System.out.println(value);
+//
+// }
 
  //driver.findElement(By.xpath("//input[@id='username']/parent::div")).sendKeys("");
 
@@ -126,20 +140,35 @@ public void enterUsernamePassword(String userName , String password){
 
    ctsTable = driver.findElement(By.cssSelector(".infobox.vcard"));
 
+//   List<WebElement> dropvalue = ctsTable.findElements(By.tagName("th"));
+//   for (WebElement e:dropvalue){
+//    e.getText();
+//   }
+   firstColumn = new ArrayList<String>();
   for (int i=0; i<ctsTable.findElements(By.tagName("th")).size();i++){
-
-   System.out.println(ctsTable.findElements(By.tagName("th")).get(i).getText());
+   firstColumn.add(ctsTable.findElements(By.tagName("th")).get(i).getText());
   }
+
+  System.out.println(firstColumn);
 
  }
 
  @And("user iterates the value from column two")
  public void userIteratesTheValueFromColumnTwo() {
 
-  for (int i=0; i<ctsTable.findElements(By.tagName("td")).size();i++){
+  List <String > secondCol = new ArrayList<String>();
+  for (int i=1; i<ctsTable.findElements(By.tagName("td")).size();i++){
 
-   System.out.println(ctsTable.findElements(By.tagName("td")).get(i).getText());
+   secondCol.add(ctsTable.findElements(By.tagName("td")).get(i).getText());
+
   }
+
+  System.out.println(secondCol);
+
+  Map<List, List > mappingValues = new HashMap<List, List >();
+  mappingValues.put(firstColumn,secondCol);
+
+  System.out.println(mappingValues.get("Type"));
 
   WebElement acq =driver.findElement(By.cssSelector(".wikitable.sortable.jquery-tablesorter"));
 
