@@ -4,10 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +15,7 @@ import resuable.BrowserCall;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
+import java.util.NoSuchElementException;
 
 public class AutomationMappingSteps {
 
@@ -31,12 +29,43 @@ public class AutomationMappingSteps {
  @When("User enter the username {string} and password {string}")
 public void enterUsernamePassword(String userName , String password){
 
-// driver.findElement(By.id("username")).sendKeys(userName);
-// driver.findElement(By.name("pw")).sendKeys(password);
+WebElement enterUserName =  driver.findElement(By.id("username"));
+WebElement enterPassword = driver.findElement(By.name("pw"));
+
+  enterUserName.sendKeys(userName);
+  enterPassword.sendKeys(password);
+
+  driver.navigate().refresh();
+
+  try{
+
+   enterUserName.sendKeys("Aravinth");
+   enterPassword.sendKeys("678");
+
+  }
+  catch (StaleElementReferenceException a){
+
+    enterUserName =  driver.findElement(By.id("username"));
+    enterPassword = driver.findElement(By.name("pw"));
+   enterUserName.sendKeys("Aravinth");
+   enterPassword.sendKeys("678");
+
+  }
+  catch (TimeoutException j){
+
+   WebDriverWait driverWait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
+
+  }
+
+
+
+
+
 // //driver.findElement(By.name("pw")).sendKeys("Madurai" + Keys.ENTER);
 
-  driver.findElement(By.cssSelector("input[id='username']")).sendKeys(userName);
-  driver.findElement(By.cssSelector("#password")).sendKeys(password);
+//  driver.findElement(By.cssSelector("input[id='username']")).sendKeys(userName);
+//  driver.findElement(By.cssSelector("#password")).sendKeys(password);
 
 //  driver.findElement(By.cssSelector(".mb16.wordwrap"));
 //
