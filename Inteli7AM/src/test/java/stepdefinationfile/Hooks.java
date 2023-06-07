@@ -9,7 +9,13 @@ import org.openqa.selenium.WebDriver;
 public class Hooks {
 
     WebDriver driver;
-    @Before()
+
+    @Before(order=0,value ="@Table")
+    public void m1(){
+        System.out.println("additional step");
+    }
+
+    @Before(order= 1)
     public void setup(){
 
         System.out.println("Before each scenario Starts");

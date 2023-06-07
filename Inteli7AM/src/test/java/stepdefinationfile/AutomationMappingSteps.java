@@ -10,14 +10,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import resuable.BrowserCall;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Duration;
+import java.util.*;
 
 public class AutomationMappingSteps {
 
@@ -77,6 +77,12 @@ public void enterUsernamePassword(String userName , String password){
  @Then("validate whether the user navigates to homepage")
  public void validateWhetherTheUserNavigatesToHomepage() {
 
+ //Dynamic Waits
+
+  WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(50));
+  driverWait.pollingEvery(Duration.ofSeconds(10));
+  driverWait.ignoring(NoSuchElementException.class);
+  driverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("123")));
 
  }
 
@@ -256,6 +262,12 @@ WebElement acqTable =  driver.findElement(By.cssSelector(".wikitable.sortable.jq
 
   driver.findElement(By.xpath("//div[@class='ui-datepicker-group ui-datepicker-group-first']//span[@class='ui-datepicker-month']")).getText();
   driver.findElement(By.cssSelector(".ui-icon.ui-icon-circle-triangle-e")).click();
+
+ }
+
+ @When("hello")
+ public void hello() {
+
 
  }
 
