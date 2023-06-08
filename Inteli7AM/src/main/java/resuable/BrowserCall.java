@@ -7,31 +7,29 @@ import org.openqa.selenium.edge.EdgeDriver;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
 public class BrowserCall {
 
-
-    static WebDriver driver;
-
+    public static Properties prob;
+    static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
     public static WebDriver bowserInvocation() throws IOException {
 
        String path = System.getProperty("user.dir");
         System.out.println(path);
         FileInputStream inputStream = new FileInputStream(new File(path + "/src/main/resources/utility/environment.properties"));
-        Properties prob = new Properties();
+        prob = new Properties();
         prob.load(inputStream);
 
         switch (prob.getProperty("browser").toLowerCase()){
 
             case "chrome":
-                driver = new ChromeDriver();
+              threadLocal.set(new ChromeDriver());
                 break;
             case "edge":
-                driver = new EdgeDriver();
+               threadLocal.set(new EdgeDriver());
                  break;
             default:
                 throw new InvalidArgumentException("invalid browser name");
@@ -50,13 +48,18 @@ public class BrowserCall {
 //        }
 
      //   driver.get(prob.getProperty("url"));
-        driver.navigate().to(prob.getProperty("url"));
-        driver.navigate().refresh();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        getDriver().navigate().to(prob.getProperty("url"));
+        getDriver().navigate().refresh();
+        getDriver().manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        return driver;
+        return getDriver();
 
+    }
+
+    public static WebDriver getDriver(){
+
+        return threadLocal.get();
     }
 
 }

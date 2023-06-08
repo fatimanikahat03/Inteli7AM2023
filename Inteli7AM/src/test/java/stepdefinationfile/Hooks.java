@@ -1,14 +1,17 @@
 package stepdefinationfile;
 
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
+import io.cucumber.java.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import pageobjects.SignInPage;
+import resuable.BrowserCall;
 
-public class Hooks {
+import java.io.IOException;
 
-    WebDriver driver;
+public class Hooks extends BrowserCall{
+
+
 
     @Before(order=0,value ="@Table")
     public void m1(){
@@ -16,28 +19,31 @@ public class Hooks {
     }
 
     @Before(order= 1)
-    public void setup(){
+    public void setup() throws IOException {
 
-        System.out.println("Before each scenario Starts");
+        BrowserCall.bowserInvocation();
 
     }
 
     @After()
     public void teardown(){
 
-     //   driver.close();
+    getDriver().quit();
 
     }
 
     @AfterStep()
-    public void takeScreenshot(){
+    public void takeScreenshot(Scenario sc){
 
-        System.out.println("Take Screenshot");
+       byte[] screenshot = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BYTES);
+       sc.attach(screenshot,"image/png",sc.getName());
+
     }
 
     @BeforeStep()
     public  void beforeStep(){
-        System.out.println("before");
+
+
     }
 
 
