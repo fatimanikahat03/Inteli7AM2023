@@ -14,7 +14,7 @@ import java.util.Properties;
 public class BrowserCall {
 
     public static Properties prob;
-    static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
     public static WebDriver bowserInvocation() throws IOException {
 
        String path = System.getProperty("user.dir");
@@ -52,6 +52,7 @@ public class BrowserCall {
         getDriver().navigate().refresh();
         getDriver().manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
 
         return getDriver();
 

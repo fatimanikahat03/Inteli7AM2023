@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -19,12 +20,10 @@ import java.util.NoSuchElementException;
 
 public class AutomationMappingSteps {
 
- WebDriver driver;   //Global Variable
- WebElement currencyElement ;
-
- WebElement ctsTable;
-
- List<String> firstColumn;
+ private WebDriver driver;   //Global Variable
+ private WebElement currencyElement ;
+ private WebElement ctsTable;
+ private List<String> firstColumn;
 
  @When("User enter the username {string} and password {string}")
 public void enterUsernamePassword(String userName , String password){
@@ -92,13 +91,16 @@ WebElement enterPassword = driver.findElement(By.name("pw"));
 
   String actualErrorMessage =   driver.findElement(By.id("error")).getText();
   String ExpectedErrorMessage = "check your username and password. If you still can't log in, contact your Salesforce administrator.";
-  if(actualErrorMessage.equals(ExpectedErrorMessage)){
+//  if(actualErrorMessage.equals(ExpectedErrorMessage)){
+//
+//   System.out.println("Equal");
+//  }
+//  else{
+//   System.out.println("Error message are not equal");
+//  }
 
-   System.out.println("Equal");
-  }
-  else{
-   System.out.println("Error message are not equal");
-  }
+  Assert.assertEquals(actualErrorMessage,ExpectedErrorMessage);
+
 
 
  }
