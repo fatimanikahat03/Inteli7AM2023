@@ -26,4 +26,9 @@ public class HomePage extends BrowserCall {
         getDriver().findElement(searchButton).click();
     }
 
+    public static boolean getUIText(){
+
+       return getDriver().findElement(By.id("123")).isEnabled();
+    }
+
 }

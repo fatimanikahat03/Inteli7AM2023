@@ -90,6 +90,9 @@ WebElement enterPassword = driver.findElement(By.name("pw"));
  public void errorMessageValidation() {
 
   String actualErrorMessage =   driver.findElement(By.id("error")).getText();
+
+  Assert.assertNotNull(actualErrorMessage);
+
   String ExpectedErrorMessage = "your username and password. If you still can't log in, contact your Salesforce administrator.";
 //  if(actualErrorMessage.equals(ExpectedErrorMessage)){
 //
@@ -106,9 +109,14 @@ WebElement enterPassword = driver.findElement(By.name("pw"));
 
 
 
+  Boolean field =driver.findElement(By.id("custom_date_picker_id_2")).isEnabled(); //true , false
+
+  Assert.assertFalse(field);
+
+  driver.findElement(By.id("ControlGroupSearchView_AvailabilitySearchInputSearchView_OneWay")).isSelected();
 
 
-
+  driver.findElement(By.id("divpaxinfo")).isDisplayed();
  }
 
  @Then("validate whether the user navigates to homepage")

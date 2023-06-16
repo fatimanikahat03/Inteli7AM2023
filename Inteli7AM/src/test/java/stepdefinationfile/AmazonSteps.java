@@ -30,6 +30,7 @@ public class AmazonSteps {
 
         HomePage.searchProduct(ReadExcel.fetchData("products",0,0));
         HomePage.clickSearchButton();
+        Assert.assertTrue(HomePage.getUIText());
 
     }
 
