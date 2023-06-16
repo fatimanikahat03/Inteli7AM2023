@@ -90,16 +90,22 @@ WebElement enterPassword = driver.findElement(By.name("pw"));
  public void errorMessageValidation() {
 
   String actualErrorMessage =   driver.findElement(By.id("error")).getText();
-  String ExpectedErrorMessage = "check your username and password. If you still can't log in, contact your Salesforce administrator.";
+  String ExpectedErrorMessage = "your username and password. If you still can't log in, contact your Salesforce administrator.";
 //  if(actualErrorMessage.equals(ExpectedErrorMessage)){
 //
-//   System.out.println("Equal");
+//    Assert.assertTrue(true);
+//
 //  }
 //  else{
-//   System.out.println("Error message are not equal");
+//
+//   Assert.assertTrue(false);
+//
 //  }
 
   Assert.assertEquals(actualErrorMessage,ExpectedErrorMessage);
+
+
+
 
 
 
