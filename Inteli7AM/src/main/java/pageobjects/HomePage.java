@@ -9,9 +9,10 @@ public class HomePage extends BrowserCall {
    static private By seachBoxLocotor = By.id("twotabsearchtextbox");
   static private By loginButtonLocotor = By.id("nav-link-accountList-nav-line-1");
 
+  static private By searchButton = By.id("nav-search-submit-button");
     //------------Methods---------------
 
-    public static void seachTextBox(String searchText){
+    public static void searchProduct(String searchText){
 
         getDriver().findElement(seachBoxLocotor).sendKeys(searchText);
     }
@@ -19,4 +20,15 @@ public class HomePage extends BrowserCall {
     public static void clickSignIn(){
         getDriver().findElement(loginButtonLocotor).click();
     }
+
+    public static void clickSearchButton(){
+
+        getDriver().findElement(searchButton).click();
+    }
+
+    public static boolean getUIText(){
+
+       return getDriver().findElement(By.id("123")).isEnabled();
+    }
+
 }
