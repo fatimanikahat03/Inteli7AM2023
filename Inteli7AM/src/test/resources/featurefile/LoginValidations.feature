@@ -3,7 +3,7 @@ Feature: Validate the login functionality of an application
   Background:
     Given User launch the browser and navigate to the URL
 
-  @TS01 @RegressionTest  @alpha @LoginTest @Asssert
+  @TS01 @RegressionTest  @alpha @LoginTest
   Scenario: To validate the error message
     When User enter the username "user1" and password "123"
     And user clicks the login button

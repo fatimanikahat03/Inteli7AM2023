@@ -4,7 +4,6 @@ import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +14,7 @@ import java.util.Properties;
 public class BrowserCall {
 
     public static Properties prob;
-    private static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+    static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
     public static WebDriver bowserInvocation() throws IOException {
 
        String path = System.getProperty("user.dir");
@@ -24,10 +23,6 @@ public class BrowserCall {
         prob = new Properties();
         prob.load(inputStream);
 
-        EdgeOptions e = new EdgeOptions();
-        e.setAcceptInsecureCerts(true);
-        e.addArguments("--disable-notifications");
-
         switch (prob.getProperty("browser").toLowerCase()){
 
             case "chrome":
@@ -35,7 +30,6 @@ public class BrowserCall {
                 break;
             case "edge":
                threadLocal.set(new EdgeDriver());
-
                  break;
             default:
                 throw new InvalidArgumentException("invalid browser name");
@@ -55,10 +49,9 @@ public class BrowserCall {
 
      //   driver.get(prob.getProperty("url"));
         getDriver().navigate().to(prob.getProperty("url"));
-
+        getDriver().navigate().refresh();
         getDriver().manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
 
         return getDriver();
 
